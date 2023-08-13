@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Add Recipe</title>
+</head>
+<body>
+   
+   
+    <nav class="navbar dark p-3 bg-danger shadow-lg">
+        <div class="container-fluid">
+
+        <a class="navbar-brand">Recipe Web Application</a>
+        <form class="d-flex">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          {% if request.user.is_authenticate %}
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="/login/">login</a></button>
+{% else %}
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="/logout/">logout</a></button>
+{% endif %}
+        </form>
+    </div>
+
+      </nav>
+
+    {% block start %}
+
+    {% endblock %}
+
+
+
+
+</body>
+</html>

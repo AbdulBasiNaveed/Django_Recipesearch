@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Recipe</title>
+</head>
+<body>
+    <form style="max-width: 700px; margin: 0 auto; background-color: #b69e9e; padding: 30px; border-radius: 10px;" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+       <h2>Update Recipe</h2>
+        <div class="form-group">
+          <label for="exampleInputEmail1"><b>Recipe name</b></label>
+          <input type="text" value="{{ recipes.recipe_name }}" name="recipe_name" class="form-control" required id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter recipe name" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleInputPassword1"><b>Recipe details</b></label>
+          <textarea class="form-control" name="recipe_details" required id="exampleInputPassword1" placeholder="Enter recipe details" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">{{ recipes.recipe_details }}</textarea>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleFileInput"><b>Choose Image File</b></label>
+          <br>
+          <img src="{{ recipes.recipe_image.url }}" alt="Recipe Image" style="max-width: 100%; height: auto;">
+          <br><br>
+          <input type="file" name="recipe_image" class="form-control-file" id="exampleFileInput" style="width: 100%;">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary" style="display: block; width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Update</button>
+      </form>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+
+{% extends "base.html" %}
+{% block start %}
+
+    <form style="max-width: 700px; margin: 0 auto; background-color: #b69e9e; padding: 30px; border-radius: 10px; "  method='post' enctype="multipart/form-data">
+        {% csrf_token%}
+
+       <h2>ADD RECIPE</h2>
+        <div class="form-group">
+          <label for="exampleInputEmail1"><b>Recipe name</b></label>
+          <input type="text" name = "recipe_name"class="form-control" required id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter recipe name" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleInputPassword1"><b>Recipe details</b></label>
+          <textarea class="form-control" name= "recipe_details" required id="exampleInputPassword1" placeholder="Enter recipe details" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleFileInput"><b>Choose Image File</b></label>
+          <input type="file" name="recipe_image" required class="form-control-file" id="exampleFileInput" style="width: 100%;">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary" style="display: block; width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
+      </form>
+     
+      <!--search baar-->
+      <div class="mt-5">
+         <div class="mx-auto col-6">
+          <form >
+          <div class="mb-3">
+            <label for="exampleInputEmail1"><b>Search Recipe</b></label>
+            <input type="text" value="{{ recipes.recipe_name }}" name="searchrecipe" class="form-control"id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter recipe name" style="width: 400px; max-width: 700px; margin: 0 auto;padding: 10px; border: 5px solid #ccc; border-radius: 4px;">
+        
+          </div> 
+          <button type="submit" class="btn btn-primary" style="display: block; width: 100px; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
+        </form>
+      </div>
+      </div>
+
+      <h2 style="text-align: center;">My Recipes</h2>
+      <table style="width: 700 px;  margin: 0 auto;border-collapse: collapse; background-color: #f7f7f7;">
+        <thead>
+            <tr>
+                <th style="background-color: #4CAF50; color: white; padding: 12px; text-align: left;">Recipe Name</th>
+                <th style="background-color: #4CAF50; color: white; padding: 12px; text-align: left;">Recipe Detail</th>
+                <th style="background-color: #4CAF50; color: white; padding: 12px; text-align: left;">Image url</th>
+                <th style="background-color: #4CAF50; color: white; padding: 12px; text-align: left;">Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+          
+            {% for n in recipes%}
+          <tr>
+            <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{n.recipe_name}}</td>
+            <td style="padding: 12px; border-bottom: 1px solid #ddd;">{{n.recipe_details}}</td>
+            <td style="padding: 12px; border-bottom: 1px solid #ddd;"><img src="/media/{{n.recipe_image}}" style="height:50px"></td>
+            <td style="padding: 12px; border-bottom: 1px solid #b80505;"><a href="/delete.recipe/{{n.id}}"  class="btn btn-danger" style="color: #b80505;">Delete</a>
+              <br><a href="/update.recipe/{{n.id}}"  class="btn btn-success" style="color: #b80505; border: #4CAF50;">Update</a>
+            </td>
+
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+      {% endblock %}
+
